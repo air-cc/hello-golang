@@ -1,6 +1,6 @@
 # GO 入门
 
-## 入门资料
+## 入门
 
 - [Go 指南（在线演示）](https://tour.go-zh.org/)：【初体验】在线使用 GO 语言
 - [Go 简明教程](https://geektutu.com/post/quick-golang.html)：【懒人福音】go 技术栈全知道（皮毛），适合有一点语言基础，快速上手 go 技术栈
@@ -15,12 +15,18 @@
 - [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
 - [如何写出优雅的 Go 语言代码](https://draveness.me/golang-101/)
 
+## 深入
+
+- [Go 语言设计与实现](https://draveness.me/golang/)
+- [Go 语言原本](https://golang.design/under-the-hood/)
+
 ## 目录说明
 
 ├── basic              # go 基础语法
 ├── module             # go 模块
 ├── template           # go 模板
 ├── third_party        # 常用第三方库
+|   └── hello-test     # unit test demo
 └── web-framework      # 流行 web 框架
     └── hello-gin      # gin demo
     └── hello-grpc     # grpc demo
