@@ -8,17 +8,20 @@
 - [Go Web 编程](https://astaxie.gitbooks.io/build-web-application-with-golang/zh/)：【概览】基础语法涉及不多，更偏重go语言在常规 Web 技术方面的使用
 - [Go语言圣经（中文版）](https://yar999.gitbooks.io/gopl-zh/content/)：go 基础语法完整表述，内容详实
 
-## 一些注意点
+## 最佳实践
 
-- new 为预定义的函数，非关键字
-- 局部变量的存储空间是分配在栈上还是堆上由编译器自动选择
-- 自增、自减是语句 不是表达式 不可以 j = i++
-- map 非线程安全，多线程存取需要使用互斥锁
-- 不要通过共享来通信，而要通过通信来共享
+- [Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
+- [Effective Go](https://golang.org/doc/effective_go)
+- [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
+- [如何写出优雅的 Go 语言代码](https://draveness.me/golang-101/)
 
-## hello-golang
+## 目录说明
 
-├── basic          # go 基础语法
-├── module         # go 模块
-└── web-framework  # 流行 web 框架
-    └── hello-gin  # gin
+├── basic              # go 基础语法
+├── module             # go 模块
+├── template           # go 模板
+├── third_party        # 常用第三方库
+└── web-framework      # 流行 web 框架
+    └── hello-gin      # gin demo
+    └── hello-grpc     # grpc demo
+    └── hello-kratos   # kratos demo

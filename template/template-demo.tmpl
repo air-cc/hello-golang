@@ -1,0 +1,11 @@
+SELECT
+{{ range $index, $field := .Fields }}
+  {{if ne $index 0}} , {{ end }} {{ $field }}
+{{ end  }}
+FROM v_form_{{ .Name }}_records
+{{ with .Filters }}
+WHERE
+  {{ range $index, $filter := . }}
+    {{if ne $index 0}} AND {{ end }} {{ $filter.FieldName }} {{ $filter.Operator }} '{{ $filter.FieldValue }}'
+  {{ end }}
+{{ end }}

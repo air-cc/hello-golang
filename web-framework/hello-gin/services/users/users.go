@@ -1,90 +1,47 @@
 package users
 
 import (
-	"fmt"
-	"reflect"
-	"time"
+	"iaircc.com/go/demo/hello-gin/dao"
+	"iaircc.com/go/demo/hello-gin/model"
 )
 
-// User 用户
-type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-	Age  uint8  `json:"age"`
-	Sex  uint8  `json:"sex" binding:"oneof=0 1"`
-}
+// Save 存储 user
+func Save(u model.User) (id int64) {
+	result := dao.InsertUser(u)
 
-// UserDao local storage
-var UserDao = make(map[string]*User)
-
-// Save 存储user
-func Save(u User) (id string) {
-	id = fmt.Sprintf("%d", time.Now().Unix())
-
-	UserDao[id] = &User{
-		ID:   id,
-		Name: u.Name,
-		Age:  u.Age,
-		Sex:  u.Sex,
+	id, err := result.LastInsertId()
+	if err != nil {
+		panic(err.Error())
 	}
 
 	return
 }
 
 // Get 获取用户信息
-func Get(id string) (User, bool) {
-	user, ok := UserDao[id]
-	if ok == false {
-		return User{}, false
-	}
+func Get(id int64) *model.User {
+	u := dao.FindUserByID(id)
 
-	return *user, ok
+	return u
 }
 
 // Update 更新用户信息
-func Update(id string, u User) bool {
-	userRecord, ok := UserDao[id]
-
-	if ok == false {
+func Update(u model.User) bool {
+	result := dao.UpdateUserByID(u)
+	af, err := result.RowsAffected()
+	if err != nil {
 		return false
 	}
 
-	fields := reflect.TypeOf(u)
-	values := reflect.ValueOf(u)
-
-	count := fields.NumField()
-
-	for i := 0; i < count; i++ {
-		field := fields.Field(i)
-		value := values.Field(i)
-
-		if value.IsZero() && field.Name != "Sex" {
-			continue
-		}
-
-		switch field.Name {
-		case "Name":
-			userRecord.Name = value.String()
-		case "Age":
-			userRecord.Age = uint8(value.Int())
-		case "Sex":
-			userRecord.Sex = uint8(value.Int())
-		default:
-			continue
-		}
-	}
-
-	return true
+	return af > 0
 }
 
 // Delete 删除用户信息
-func Delete(id string) bool {
-	_, ok := UserDao[id]
-	if ok == false {
+func Delete(id int64) bool {
+	result := dao.DelUserByID(id)
+	af, err := result.RowsAffected()
+	if err != nil {
 		return false
 	}
 
-	delete(UserDao, id)
-
-	return true
+	return af > 0
 }

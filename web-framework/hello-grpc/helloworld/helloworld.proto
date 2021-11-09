@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package helloworld;
+
+import "google/api/annotations.proto";
+
+option go_package = "iaircc.com/go/demo/hellogrpc/helloworld";
+option java_multiple_files = true;
+option java_package = "com.iaircc.go.demo.hellogrpc.helloworld";
+option java_outer_classname = "HelloWorldProto";
+
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      get: "/helloworld/{name}",
+    };
+  };
+}
+
+// hello 请求体
+message HelloRequest {
+  string name = 1;
+}
+
+// hello 响应体
+message HelloReply {
+  string message = 1;
+}
+
+

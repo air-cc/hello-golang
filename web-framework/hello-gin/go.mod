@@ -2,12 +2,9 @@ module iaircc.com/go/demo/hello-gin
 
 go 1.15
 
-replace iaircc.com/go/demo/hello-gin/routes => ./routes
-
-replace iaircc.com/go/demo/hello-gin/services/users => ./services/users
-
 require (
 	github.com/gin-gonic/gin v1.6.3
+	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
